@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting to Know You - A Warm Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --cream: #FFF8E7;
+            --warm-white: #FFFCF5;
+            --yellow-accent: #FFD93D;
+            --yellow-light: #FFF3B0;
+            --blue-header: #2C5F7C;
+            --blue-soft: #5A9BB5;
+            --blue-light: #E8F4F8;
+            --text-dark: #3D3D3D;
+            --text-soft: #666666;
+            --green-soft: #A8D5BA;
+            --pink-soft: #FFB6C1;
+            --border-hand: #D4A574;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background: linear-gradient(135deg, var(--cream) 0%, #FFF5E0 100%);
+            color: var(--text-dark);
+            line-height: 1.7;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--warm-white);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            overflow: hidden;
+            border: 3px solid var(--border-hand);
+            position: relative;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border: 2px dashed var(--yellow-accent);
+            border-radius: 24px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--blue-header) 0%, var(--blue-soft) 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: var(--warm-white);
+            border-radius: 50% 50% 0 0;
+        }
+
+        .header h1 {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+            font-weight: 600;
+        }
+
+        /* Welcome section */
+        .welcome {
+            padding: 30px;
+            background: linear-gradient(to bottom, var(--warm-white), var(--yellow-light));
+            border-bottom: 2px dashed var(--border-hand);
+        }
+
+        .welcome-text {
+            font-size: 1.05em;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .privacy-box {
+            background: var(--blue-light);
+            border-left: 5px solid var(--blue-soft);
+            padding: 20px;
+            border-radius: 0 15px 15px 0;
+            margin-top: 20px;
+            font-size: 0.95em;
+        }
+
+        .privacy-box strong {
+            color: var(--blue-header);
+        }
+
+        /* Section styling */
+        .section {
+            padding: 30px;
+            border-bottom: 2px dashed var(--border-hand);
+            position: relative;
+        }
+
+        .section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .section-number {
+            background: var(--yellow-accent);
+            color: var(--blue-header);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.3em;
+            box-shadow: 3px 3px 0 var(--border-hand);
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.6em;
+            color: var(--blue-header);
+        }
+
+        .section-note {
+            color: var(--text-soft);
+            font-style: italic;
+            margin-top: 5px;
+        }
+
+        /* Form elements */
+        .question {
+            margin-bottom: 25px;
+        }
+
+        .question-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+            font-size: 1.05em;
+        }
+
+        .question-label .optional {
+            font-weight: 400;
+            color: var(--text-soft);
+            font-size: 0.9em;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--border-hand);
+            border-radius: 12px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1em;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--blue-soft);
+            box-shadow: 0 0 0 4px var(--blue-light);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        /* Checkbox styling */
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .checkbox-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 10px;
+            transition: background 0.2s;
+        }
+
+        .checkbox-item:hover {
+            background: var(--yellow-light);
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--border-hand);
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .checkbox-item input[type="checkbox"]:checked {
+            background: var(--blue-soft);
+            border-color: var(--blue-soft);
+        }
+
+        .checkbox-item input[type="checkbox"]:checked::after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 2px;
+            width: 6px;
+            height: 12px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .checkbox-item label {
+            cursor: pointer;
+            font-size: 0.95em;
+        }
+
+        /* Radio styling */
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .radio-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 10px;
+            transition: background 0.2s;
+        }
+
+        .radio-item:hover {
+            background: var(--yellow-light);
+        }
+
+        .radio-item input[type="radio"] {
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border: 2px solid var(--border-hand);
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .radio-item input[type="radio"]:checked {
+            border-color: var(--blue-soft);
+        }
+
+        .radio-item input[type="radio"]:checked::after {
+            content: '';
+            position: absolute;
+            left: 4px;
+            top: 4px;
+            width: 10px;
+            height: 10px;
+            background: var(--blue-soft);
+            border-radius: 50%;
+        }
+
+        .radio-item label {
+            cursor: pointer;
+            font-size: 0.95em;
+        }
+
+        /* Inline inputs */
+        .inline-input {
+            display: inline-block;
+            width: auto;
+            min-width: 150px;
+            margin: 0 5px;
+        }
+
+        .inline-input-short {
+            display: inline-block;
+            width: auto;
+            min-width: 80px;
+            margin: 0 5px;
+        }
+
+        /* Contact grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .contact-grid .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Two column layout for checkboxes */
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+        }
+
+        @media (max-width: 600px) {
+            .checkbox-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 2em;
+            }
+        }
+
+        /* Illustration */
+        .illustration {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .illustration img {
+            max-width: 280px;
+            height: auto;
+        }
+
+        .illustration-small img {
+            max-width: 200px;
+        }
+
+        .illustration-right {
+            float: right;
+            margin: 0 0 15px 20px;
+            max-width: 180px;
+        }
+
+        .illustration-left {
+            float: left;
+            margin: 0 20px 15px 0;
+            max-width: 180px;
+        }
+
+        .clearfix::after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+
+        /* Safety box */
+        .safety-box {
+            background: linear-gradient(135deg, #FFE4E1 0%, #FFF0F0 100%);
+            border: 2px solid #E8A0A0;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .safety-box h3 {
+            color: #C44444;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        .safety-box p {
+            color: #8B4444;
+            font-size: 0.95em;
+        }
+
+        /* Resources box */
+        .resources-box {
+            background: linear-gradient(135deg, var(--blue-light) 0%, #E0F0E8 100%);
+            border: 2px solid var(--blue-soft);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .resources-box h3 {
+            color: var(--blue-header);
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+
+        .resources-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .resources-box li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .resources-box li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            width: 8px;
+            height: 8px;
+            background: var(--blue-soft);
+            border-radius: 50%;
+        }
+
+        /* Send button */
+        .submit-section {
+            padding: 40px 30px;
+            text-align: center;
+            background: linear-gradient(to bottom, var(--warm-white), var(--yellow-light));
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, var(--blue-header) 0%, var(--blue-soft) 100%);
+            color: white;
+            border: none;
+            padding: 18px 60px;
+            font-size: 1.3em;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(44, 95, 124, 0.3);
+            transition: all 0.3s ease;
+            font-family: 'Patrick Hand', cursive;
+            letter-spacing: 1px;
+        }
+
+        .send-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(44, 95, 124, 0.4);
+        }
+
+        .send-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-note {
+            margin-top: 15px;
+            color: var(--text-soft);
+            font-size: 0.9em;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--blue-header);
+            color: white;
+            font-size: 0.9em;
+        }
+
+        /* Decorative elements */
+        .heart-deco {
+            color: var(--pink-soft);
+            font-size: 1.2em;
+        }
+
+        .star-deco {
+            color: var(--yellow-accent);
+        }
+
+        /* Text with inline checkboxes */
+        .inline-check {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin: 0 10px;
+        }
+
+        .inline-check input {
+            margin: 0;
+        }
+
+        /* Thank you message */
+        .thank-you {
+            display: none;
+            padding: 60px 30px;
+            text-align: center;
+        }
+
+        .thank-you.active {
+            display: block;
+        }
+
+        .thank-you h2 {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 2.5em;
+            color: var(--blue-header);
+            margin-bottom: 20px;
+        }
+
+        .thank-you p {
+            font-size: 1.1em;
+            color: var(--text-soft);
+        }
+
+        /* Hide form when submitted */
+        form.hidden {
+            display: none;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Getting to Know You</h1>
+            <p class="subtitle">A Warm Welcome to Our Services</p>
+        </div>
+
+        <!-- Welcome Section -->
+        <div class="welcome">
+            <p class="welcome-text">
+                Welcome! We are so glad you are here. This form helps us understand how best to support you. 
+                There are no right or wrong answers. Please take your time, and feel free to skip any question 
+                you're not comfortable answering right now. We keep everything you share private and confidential.
+            </p>
+            <div class="privacy-box">
+                <strong>Your Privacy Matters:</strong> We protect the information you provide under HIPAA and NYC confidentiality laws. 
+                We share it only with your direct care team unless you give explicit written permission otherwise. 
+                You have the right to review, update, or request deletion of your records at any time.
+            </div>
+        </div>
+
+        <form id="intakeForm" action="https://formsubmit.co/ivannestserav@gmail.com" method="POST">
+            <!-- Hidden fields for FormSubmit -->
+            <input type="hidden" name="_subject" value="New Intake Form Submission">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+
+            <!-- Section 1: About You -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <div>
+                        <div class="section-title">About You</div>
+                        <div class="section-note">Share as much or as little as you like</div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">What name would you like us to call you?</label>
+                    <input type="text" name="preferred_name" placeholder="Your preferred name">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">What are your preferred pronouns? <span class="optional">(Optional)</span></label>
+                    <div class="checkbox-row">
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="pronouns" value="She/Her" id="pronoun_she">
+                            <label for="pronoun_she">She/Her</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="pronouns" value="He/Him" id="pronoun_he">
+                            <label for="pronoun_he">He/Him</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="pronouns" value="They/Them" id="pronoun_they">
+                            <label for="pronoun_they">They/Them</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="pronouns" value="Other" id="pronoun_other">
+                            <label for="pronoun_other">Other:</label>
+                            <input type="text" name="pronoun_other_text" class="inline-input-short" placeholder="specify">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">What is the best way to reach you?</label>
+                    <div class="contact-grid">
+                        <div>
+                            <label style="font-size:0.9em; color:var(--text-soft);">Phone:</label>
+                            <input type="tel" name="phone" placeholder="(___) ___-____">
+                        </div>
+                        <div>
+                            <label style="font-size:0.9em; color:var(--text-soft);">Email:</label>
+                            <input type="email" name="email" placeholder="your@email.com">
+                        </div>
+                        <div class="full-width">
+                            <div class="checkbox-row">
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="text_ok" value="Yes" id="text_yes">
+                                    <label for="text_yes">Text: Yes</label>
+                                </div>
+                                <div class="checkbox-item">
+                                    <input type="checkbox" name="text_ok" value="No" id="text_no">
+                                    <label for="text_no">Text: No</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">Is it okay to leave a voicemail?</label>
+                    <div class="radio-row">
+                        <div class="radio-item">
+                            <input type="radio" name="voicemail" value="Yes" id="vm_yes">
+                            <label for="vm_yes">Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="voicemail" value="No" id="vm_no">
+                            <label for="vm_no">No</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="voicemail" value="Only say name" id="vm_name">
+                            <label for="vm_name">Only say it's from:</label>
+                            <input type="text" name="voicemail_name" class="inline-input" placeholder="name you choose">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">When is it safest or most convenient for us to contact you?</label>
+                    <div class="checkbox-row">
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="contact_time" value="Morning" id="time_morning">
+                            <label for="time_morning">Morning</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="contact_time" value="Afternoon" id="time_afternoon">
+                            <label for="time_afternoon">Afternoon</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="contact_time" value="Evening" id="time_evening">
+                            <label for="time_evening">Evening</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="contact_time" value="Anytime" id="time_anytime">
+                            <label for="time_anytime">Anytime</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="contact_time" value="Other" id="time_other">
+                            <label for="time_other">Other:</label>
+                            <input type="text" name="contact_time_other" class="inline-input-short" placeholder="specify">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">Do you have any accessibility needs we should know about?</label>
+                    <textarea name="accessibility_needs" rows="3" placeholder="Please describe any accessibility needs..."></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">Do you have a safe, stable place to stay right now?</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="housing" value="Yes, stable housing" id="housing_stable">
+                            <label for="housing_stable">Yes, stable housing</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="housing" value="With family/friends" id="housing_family">
+                            <label for="housing_family">With family/friends</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="housing" value="Temporary housing/shelter" id="housing_temp">
+                            <label for="housing_temp">Temporary housing/shelter</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="housing" value="Currently unhoused" id="housing_unhoused">
+                            <label for="housing_unhoused">Currently unhoused</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="housing" value="At risk of losing housing" id="housing_risk">
+                            <label for="housing_risk">At risk of losing housing</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="housing" value="Prefer not to say" id="housing_pns">
+                            <label for="housing_pns">Prefer not to say</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">Which NYC borough do you spend most of your time in?</label>
+                    <div class="checkbox-row">
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="borough" value="Bronx" id="boro_bronx">
+                            <label for="boro_bronx">Bronx</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="borough" value="Brooklyn" id="boro_brooklyn">
+                            <label for="boro_brooklyn">Brooklyn</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="borough" value="Manhattan" id="boro_manhattan">
+                            <label for="boro_manhattan">Manhattan</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="borough" value="Queens" id="boro_queens">
+                            <label for="boro_queens">Queens</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="borough" value="Staten Island" id="boro_staten">
+                            <label for="boro_staten">Staten Island</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="borough" value="Prefer not to say" id="boro_pns">
+                            <label for="boro_pns">Prefer not to say</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: What Brings You Here? -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <div class="section-title">What Brings You Here?</div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">In your own words, what made you decide to reach out for support?</label>
+                    <textarea name="what_brings_you" rows="4" placeholder="Share as much or as little as you'd like..."></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">Is there anything urgent or time-sensitive we should know about?</label>
+                    <textarea name="urgent matters" rows="3" placeholder="Please let us know if there's anything urgent..."></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">Have you worked with a social worker or similar services before?</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="previous_services" value="Yes, and it was helpful" id="prev_yes_help">
+                            <label for="prev_yes_help">Yes, and it was helpful</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="previous_services" value="Yes, and it was not helpful" id="prev_yes_nohelp">
+                            <label for="prev_yes_nohelp">Yes, and it was not helpful</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="previous_services" value="No, this is my first time" id="prev_no">
+                            <label for="prev_no">No, this is my first time</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="previous_services" value="I am not sure" id="prev_unsure">
+                            <label for="prev_unsure">I am not sure</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="previous_services" value="Prefer not to say" id="prev_pns">
+                            <label for="prev_pns">Prefer not to say</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 3: Areas Where You'd Like Support -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <div class="section-title">Areas Where You'd Like Support</div>
+                    <div class="section-note">Check all that apply</div>
+                </div>
+
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="support_areas" value="Housing / Shelter assistance" id="sup_housing">
+                        <label for="sup_housing">Housing / Shelter assistance</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="support_areas" value="Food / Nutrition" id="sup_food">
+                        <label for="sup_food">Food / Nutrition (SNAP, food pantries, meals)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="support_areas" value="Healthcare / Medical services" id="sup_health">
+                        <label for="sup_health">Healthcare / Medical services</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="support_areas" value="Mental health / Counseling" id="sup_mental">
+                        <label for="sup_mental">Mental health / Counseling</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="support_areas" value="Substance use / Recovery support" id="sup_substance">
+                        <label for="sup_substance">Substance use / Recovery support</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="support_areas" value="HIV/AIDS resources" id="sup_hiv">
+                        <label for="sup_hiv">HIV/AIDS resources &amp; support</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="support_areas" value="Employment / Job training" id="sup_employment">
+                        <label for="sup_employment">Employment / Job training</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="support_areas" value="Financial assistance / Benefits" id="sup_financial">
+                        <label for="sup_financial">Financial assistance / Benefits (SSI, SSDI, welfare)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="support_areas" value="Legal help" id="sup_legal">
+                        <label for="sup_legal">Legal help (housing court, immigration, family law)</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="support_areas" value="Domestic violence / Safety planning" id="sup_dv">
+                        <label for="sup_dv">Domestic violence / Safety planning</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="support_areas" value="Childcare / Family services" id="sup_childcare">
+                        <label for="sup_childcare">Childcare / Family services</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="support_areas" value="Transportation assistance" id="sup_transport">
+                        <label for="sup_transport">Transportation assistance</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="support_areas" value="Education / School support" id="sup_education">
+                        <label for="sup_education">Education / School support</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="support_areas" value="Disability services / Accommodations" id="sup_disability">
+                        <label for="sup_disability">Disability services / Accommodations</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="support_areas" value="LGBTQ+ affirming resources" id="sup_lgbtq">
+                        <label for="sup_lgbtq">LGBTQ+ affirming resources</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="support_areas" value="Senior services" id="sup_senior">
+                        <label for="sup_senior">Senior services</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="support_areas" value="Veteran services" id="sup_veteran">
+                        <label for="sup_veteran">Veteran services</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="support_areas" value="Something else" id="sup_other">
+                        <label for="sup_other">Something else:</label>
+                        <input type="text" name="support_areas_other" class="inline-input" placeholder="please specify">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 4: What Would You Like From Your Social Worker? -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <div class="section-title">What Would You Like From Your Social Worker?</div>
+                    <div class="section-note">Check all that apply</div>
+                </div>
+
+                <div class="illustration">
+                    <img src="img_writing.png" alt="Illustration of person writing" style="max-width:260px;">
+                </div>
+
+                <div class="checkbox-grid">
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="social_worker_help" value="Someone to listen" id="sw_listen">
+                        <label for="sw_listen">Someone to listen</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="social_worker_help" value="Help finding resources" id="sw_resources">
+                        <label for="sw_resources">Help finding resources</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="social_worker_help" value="Help understanding my options" id="sw_options">
+                        <label for="sw_options">Help understanding my options</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="social_worker_help" value="Help completing applications/forms" id="sw_forms">
+                        <label for="sw_forms">Help completing applications/forms</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="social_worker_help" value="Emotional support" id="sw_emotional">
+                        <label for="sw_emotional">Emotional support</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="social_worker_help" value="Help communicating with another agency" id="sw_communicate">
+                        <label for="sw_communicate">Help communicating with another agency</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="social_worker_help" value="Help making a plan" id="sw_plan">
+                        <label for="sw_plan">Help making a plan</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="social_worker_help" value="Advocacy" id="sw_advocacy">
+                        <label for="sw_advocacy">Advocacy</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="social_worker_help" value="I'm not sure yet" id="sw_unsure">
+                        <label for="sw_unsure">I'm not sure yet</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" name="social_worker_help" value="Something else" id="sw_other">
+                        <label for="sw_other">Something else:</label>
+                        <input type="text" name="social_worker_help_other" class="inline-input" placeholder="please specify">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 5: Your Comfort & Preferences -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">5</div>
+                    <div class="section-title">Your Comfort &amp; Preferences</div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">What would make you feel most comfortable when meeting with a social worker?</label>
+                    <textarea name="comfort" rows="3" placeholder="Share what would help you feel at ease..."></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">Where would you prefer to meet?</label>
+                    <div class="checkbox-row">
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="meeting_location" value="At the social worker's office" id="loc_office">
+                            <label for="loc_office">At the social worker's office</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="meeting_location" value="At my home" id="loc_home">
+                            <label for="loc_home">At my home</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="meeting_location" value="At a community center" id="loc_community">
+                            <label for="loc_community">At a community center</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="meeting_location" value="Over the phone" id="loc_phone">
+                            <label for="loc_phone">Over the phone</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="meeting_location" value="Video call" id="loc_video">
+                            <label for="loc_video">Video call</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="meeting_location" value="Outdoors / Walk" id="loc_outdoor">
+                            <label for="loc_outdoor">Outdoors / Walk</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="meeting_location" value="Text-based only" id="loc_text">
+                            <label for="loc_text">Text-based only</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="meeting_location" value="Other" id="loc_other">
+                            <label for="loc_other">Other:</label>
+                            <input type="text" name="meeting_location_other" class="inline-input-short" placeholder="specify">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">Has anything made it hard for you to ask for help in the past?</label>
+                    <textarea name="barriers_to_help" rows="3" placeholder="It's okay to share - this helps us support you better..."></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">Are there any topics that feel especially difficult to talk about? <span class="optional">(It's okay to say — we can go slowly)</span></label>
+                    <textarea name="difficult_topics" rows="3" placeholder="Let us know if there are topics you'd like to approach gently..."></textarea>
+                </div>
+            </div>
+
+            <!-- Section 6: Your Strengths & Support System -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">6</div>
+                    <div class="section-title">Your Strengths &amp; Support System</div>
+                </div>
+
+                <div class="illustration">
+                    <img src="img_heart.png" alt="Illustration of person holding a heart" style="max-width:200px;">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">What are some things you are good at or proud of? <span class="optional">(No wrong answer)</span></label>
+                    <textarea name="strengths" rows="3" placeholder="Celebrate yourself - what makes you proud?"></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">Who are the people (or pets!) in your life who support you?</label>
+                    <textarea name="support_system" rows="3" placeholder="Name the people and furry friends who have your back..."></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">What helps you feel calm or grounded when things get stressful?</label>
+                    <textarea name="coping_strategies" rows="3" placeholder="What are your go-to calming activities or practices?"></textarea>
+                </div>
+            </div>
+
+            <!-- Section 7: Are You Safe Right Now? -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">7</div>
+                    <div class="section-title">Are You Safe Right Now?</div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">Do you feel safe where you are living right now?</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="safety_home" value="Yes" id="safe_yes">
+                            <label for="safe_yes">Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="safety_home" value="Mostly, but I have some concerns" id="safe_mostly">
+                            <label for="safe_mostly">Mostly, but I have some concerns</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="safety_home" value="No, I do not feel safe" id="safe_no">
+                            <label for="safe_no">No, I do not feel safe</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="safety_home" value="Prefer not to say" id="safe_pns">
+                            <label for="safe_pns">Prefer not to say</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">In the past month, have you had thoughts of hurting yourself or not wanting to be alive?</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="self_harm_thoughts" value="No" id="sh_no">
+                            <label for="sh_no">No</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="self_harm_thoughts" value="Yes, but I do not have a plan" id="sh_yes_noplan">
+                            <label for="sh_yes_noplan">Yes, but I do not have a plan</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="self_harm_thoughts" value="Yes, and I am worried I might act on them" id="sh_yes_plan">
+                            <label for="sh_yes_plan">Yes, and I am worried I might act on them</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="self_harm_thoughts" value="Prefer not to say" id="sh_pns">
+                            <label for="sh_pns">Prefer not to say</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="safety-box">
+                    <h3>Your safety matters most.</h3>
+                    <p>
+                        If you are in immediate danger, please call <strong>911</strong> or go to the nearest emergency room.<br>
+                        If you are thinking about hurting yourself or someone else, you can call or text <strong>988</strong> anytime — it's free and confidential.
+                    </p>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">Is anyone hurting you, threatening you, or making you feel afraid?</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="being_hurt" value="No" id="hurt_no">
+                            <label for="hurt_no">No</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="being_hurt" value="Yes" id="hurt_yes">
+                            <label for="hurt_yes">Yes</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="being_hurt" value="I am not sure" id="hurt_unsure">
+                            <label for="hurt_unsure">I am not sure</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="being_hurt" value="Prefer not to say" id="hurt_pns">
+                            <label for="hurt_pns">Prefer not to say</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">Do you have a safe person you can call if you need help right away?</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="safe_person" value="Yes" id="sp_yes">
+                            <label for="sp_yes">Yes:</label>
+                            <input type="text" name="safe_person_name" class="inline-input" placeholder="name or contact">
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="safe_person" value="No" id="sp_no">
+                            <label for="sp_no">No</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="safe_person" value="I am not sure" id="sp_unsure">
+                            <label for="sp_unsure">I am not sure</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 8: Practical Information -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">8</div>
+                    <div>
+                        <div class="section-title">Practical Information</div>
+                        <div class="section-note">This helps us connect you to the right NYC resources</div>
+                    </div>
+                </div>
+
+                <div class="illustration">
+                    <img src="img_cat.png" alt="Illustration of person hugging a cat" style="max-width:240px;">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">Are you currently receiving any of these benefits? <span class="optional">(Check all that apply)</span></label>
+                    <div class="checkbox-grid">
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="benefits" value="Medicaid" id="ben_medicaid">
+                            <label for="ben_medicaid">Medicaid</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="benefits" value="Medicare" id="ben_medicare">
+                            <label for="ben_medicare">Medicare</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="benefits" value="SNAP" id="ben_snap">
+                            <label for="ben_snap">SNAP (Food Stamps)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="benefits" value="Cash Assistance" id="ben_cash">
+                            <label for="ben_cash">Cash Assistance (Welfare/TANF)</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="benefits" value="SSI/SSDI" id="ben_ssi">
+                            <label for="ben_ssi">SSI/SSDI</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="benefits" value="Section 8" id="ben_section8">
+                            <label for="ben_section8">Section 8 / Housing voucher</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="benefits" value="None of the above" id="ben_none">
+                            <label for="ben_none">None of the above</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">Do you have health insurance?</label>
+                    <div class="radio-row">
+                        <div class="radio-item">
+                            <input type="radio" name="health_insurance" value="Yes" id="hi_yes">
+                            <label for="hi_yes">Yes:</label>
+                            <input type="text" name="health_insurance_name" class="inline-input" placeholder="insurance name">
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="health_insurance" value="No" id="hi_no">
+                            <label for="hi_no">No</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="health_insurance" value="Not sure" id="hi_unsure">
+                            <label for="hi_unsure">Not sure</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">Are you currently working?</label>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input type="radio" name="employment" value="Yes, full-time" id="work_ft">
+                            <label for="work_ft">Yes, full-time</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="employment" value="Yes, part-time" id="work_pt">
+                            <label for="work_pt">Yes, part-time</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="employment" value="No, but looking" id="work_looking">
+                            <label for="work_looking">No, but looking</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="employment" value="No, and not looking right now" id="work_notlooking">
+                            <label for="work_notlooking">No, and not looking right now</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="employment" value="Unable to work due to health/disability" id="work_unable">
+                            <label for="work_unable">Unable to work due to health/disability</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="employment" value="Retired" id="work_retired">
+                            <label for="work_retired">Retired</label>
+                        </div>
+                        <div class="radio-item">
+                            <input type="radio" name="employment" value="Student" id="work_student">
+                            <label for="work_student">Student</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resources-box">
+                    <h3>NYC Resources Available 24/7</h3>
+                    <ul>
+                        <li><strong>988</strong> — Suicide &amp; Crisis Lifeline (call or text)</li>
+                        <li><strong>311</strong> — NYC Non-Emergency Services &amp; Info</li>
+                        <li><strong>1-800-621-HOPE (4673)</strong> — NYC Domestic Violence Hotline</li>
+                        <li><strong>NYC Well:</strong> Call 1-888-NYC-WELL (1-888-692-9355) or text 'WELL' to 65173</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Section 9: Anything Else -->
+            <div class="section">
+                <div class="section-header">
+                    <div class="section-number">9</div>
+                    <div class="section-title">Anything Else You Want Us to Know?</div>
+                </div>
+
+                <div class="illustration">
+                    <img src="img_thanks.png" alt="Illustration of person with clipboard" style="max-width:220px;">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">Is there anything else that would help us understand you better or support you more effectively?</label>
+                    <textarea name="additional_info" rows="5" placeholder="Share anything else you'd like us to know..."></textarea>
+                </div>
+            </div>
+
+            <!-- Submit Section -->
+            <div class="submit-section">
+                <button type="submit" class="send-btn">SEND</button>
+                <p class="submit-note">Your responses will be sent securely to our team.</p>
+            </div>
+        </form>
+
+        <!-- Thank You Message (shown after submission) -->
+        <div class="thank-you" id="thankYou">
+            <div class="illustration">
+                <img src="img_thanks.png" alt="Thank you illustration" style="max-width:200px;">
+            </div>
+            <h2>Thank You for Sharing With Us</h2>
+            <p>We have received your information and will be in touch soon.<br>Your courage in reaching out is the first step toward support.</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Your privacy is protected under HIPAA and NYC confidentiality laws.</p>
+        </div>
+    </div>
+
+    <script>
+        // Handle form submission with visual feedback
+        document.getElementById('intakeForm').addEventListener('submit', function(e) {
+            // The form will submit to FormSubmit.co normally
+            // We just add a small delay to show the thank you message
+            setTimeout(function() {
+                document.getElementById('intakeForm').classList.add('hidden');
+                document.getElementById('thankYou').classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 500);
+        });
+
+        // Smooth scroll for any anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
