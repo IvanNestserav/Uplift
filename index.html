@@ -567,7 +567,6 @@
             display: none;
         }
     </style>
-<base target="_blank">
 </head>
 <body>
     <div class="container">
@@ -1301,24 +1300,98 @@
     </div>
 
     <script>
-        // Handle form submission with visual feedback
-        document.getElementById('intakeForm').addEventListener('submit', function(e) {
-            // The form will submit to FormSubmit.co normally
-            // We just add a small delay to show the thank you message
-            setTimeout(function() {
-                document.getElementById('intakeForm').classList.add('hidden');
-                document.getElementById('thankYou').classList.add('active');
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, 500);
+        const form = document.getElementById('intakeForm');
+        const thankYou = document.getElementById('thankYou');
+        const submitButton = form.querySelector('button[type="submit"]');
+
+        // Checkbox groups that should be delivered as one clear, comma-separated answer.
+        const checkboxGroups = [
+            ['pronouns', 'Preferred pronouns', 'pronoun_other_text'],
+            ['text_ok', 'Okay to text'],
+            ['contact_time', 'Best contact time', 'contact_time_other'],
+            ['borough', 'NYC borough'],
+            ['support_areas', 'Areas where support is needed', 'support_areas_other'],
+            ['social_worker_help', 'What the person would like from a social worker', 'social_worker_help_other'],
+            ['meeting_location', 'Preferred meeting location', 'meeting_location_other'],
+            ['benefits', 'Current benefits']
+        ];
+
+        function addCombinedAnswers(formData) {
+            checkboxGroups.forEach(([name, label, otherFieldName]) => {
+                const selected = Array.from(form.querySelectorAll(`input[type="checkbox"][name="${name}"]:checked`))
+                    .map(input => input.value)
+                    .filter(value => value !== 'Other' && value !== 'Something else');
+
+                if (otherFieldName) {
+                    const otherField = form.querySelector(`[name="${otherFieldName}"]`);
+                    const otherText = otherField ? otherField.value.trim() : '';
+                    const otherChecked = Array.from(form.querySelectorAll(`input[type="checkbox"][name="${name}"]:checked`))
+                        .some(input => input.value === 'Other' || input.value === 'Something else');
+
+                    if (otherChecked && otherText) {
+                        selected.push(`Other: ${otherText}`);
+                    } else if (otherChecked) {
+                        selected.push('Other');
+                    }
+                }
+
+                // Remove repeated checkbox values and replace them with one readable field.
+                formData.delete(name);
+                if (selected.length) formData.append(label, selected.join(', '));
+            });
+        }
+
+        // Keep the "Other" text fields connected to their checkbox choices.
+        checkboxGroups.forEach(([name, , otherFieldName]) => {
+            if (!otherFieldName) return;
+            const otherField = form.querySelector(`[name="${otherFieldName}"]`);
+            const otherCheckbox = Array.from(form.querySelectorAll(`input[type="checkbox"][name="${name}"]`))
+                .find(input => input.value === 'Other' || input.value === 'Something else');
+            if (!otherField || !otherCheckbox) return;
+
+            otherField.disabled = !otherCheckbox.checked;
+            otherField.addEventListener('input', () => {
+                if (otherField.value.trim()) otherCheckbox.checked = true;
+            });
+            otherCheckbox.addEventListener('change', () => {
+                otherField.disabled = !otherCheckbox.checked;
+                if (!otherCheckbox.checked) otherField.value = '';
+                if (otherCheckbox.checked) otherField.focus();
+            });
         });
 
-        // Smooth scroll for any anchor links
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            submitButton.disabled = true;
+            submitButton.textContent = 'SENDING...';
+
+            const formData = new FormData(form);
+            addCombinedAnswers(formData);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (!response.ok) throw new Error('Submission failed');
+
+                form.classList.add('hidden');
+                thankYou.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } catch (error) {
+                alert('We were unable to send your form. Please check your internet connection and try again.');
+                submitButton.disabled = false;
+                submitButton.textContent = 'SEND';
+            }
+        });
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
             });
         });
     </script>
